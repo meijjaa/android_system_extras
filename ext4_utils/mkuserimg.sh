@@ -88,6 +88,12 @@ fi
 if [ -z $SIZE ]; then
   echo "Need size of filesystem"
   exit 2
+elif [ 0 -eq 0$SIZE ]; then
+  s=$(du -sm $SRC_DIR | cut -f1)
+  e=$(($s / 10))
+  echo $TARGET_PRODUCT | grep -q 64 && l=250 || l=130
+  [ $e -lt $l ] && e=$l
+  SIZE=$(($s + $e))M
 fi
 
 OPT=""
